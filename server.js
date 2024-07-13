@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000;
 mongoose.connect('mongodb+srv://sanadab7:PasswordPassword@cluster0.qxmzvmg.mongodb.net/?retryWrites=true&w=majority');
 
 
-// Start the server
+// Start the servers
 const listener = app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

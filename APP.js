@@ -77,6 +77,21 @@ app.get('/Freelancer-Profile', (req, res) => {
         res.render('Freelancer-Profile');
     }
 });
+app.get('/Admin-Profile', (req, res) => {
+    const user = isAdmin(req, res);
+    if (user) {
+        res.render('Admin-Profile');
+    }
+});
+app.get('/View-Users', async(req, res) => {
+    try {
+        const users = await User.find({});
+        res.render('View-Users', { users });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error retrieving users");
+    }
+});
 
 function isFreelanser(req, res) {
     const user = readCookie(req, "user");
