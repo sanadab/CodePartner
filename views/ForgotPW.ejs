@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <style>
+        /* Resetting default margin and padding for all elements */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Body styles for centering content */
+        
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom right, #001f3f, #5bb2e1);
+            margin: 0;
+            padding: 0 20px;
+        }
+        
+        header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .navbar-nav {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+            margin-left: auto;
+        }
+        
+        .navbar-nav li {
+            padding: 0 10px;
+        }
+        
+        .navbar-nav li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar-nav li a:hover {
+            color: #00bfff;
+        }
+        /* Your existing CSS styles */
+        
+        .form {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 450px;
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+            background-color: #1a1a1a;
+            color: #fff;
+            border: 1px solid #333;
+            margin-top: 80px;
+            /* Adjusted to prevent overlap with navbar */
+        }
+        
+        .title {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -1px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+            color: #00bfff;
+        }
+        
+        .title::before,
+        .title::after {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            left: 0px;
+            background-color: #00bfff;
+        }
+        
+        .title::before {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .title::after {
+            width: 18px;
+            height: 18px;
+            animation: pulse 1s linear infinite;
+        }
+        
+        .message,
+        .signup {
+            font-size: 14.5px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .signup {
+            text-align: center;
+        }
+        
+        .signup a:hover {
+            text-decoration: underline royalblue;
+        }
+        
+        .signup a {
+            color: #00bfff;
+        }
+        
+        .flex {
+            display: flex;
+            width: 100%;
+            gap: 6px;
+        }
+        
+        .form label {
+            position: relative;
+        }
+        
+        .form label .input {
+            background-color: #333;
+            color: #fff;
+            width: 100%;
+            padding: 20px 5px 5px 10px;
+            outline: 0;
+            border: 1px solid rgba(105, 105, 105, 0.397);
+            border-radius: 10px;
+        }
+        
+        .form label .input+span {
+            color: rgba(255, 255, 255, 0.5);
+            position: absolute;
+            left: 10px;
+            top: 0px;
+            font-size: 0.9em;
+            cursor: text;
+            transition: 0.3s ease;
+        }
+        
+        .form label .input:placeholder-shown+span {
+            top: 12.5px;
+            font-size: 0.9em;
+        }
+        
+        .form label .input:focus+span,
+        .form label .input:valid+span {
+            color: #00bfff;
+            top: 0px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+        
+        .input {
+            font-size: medium;
+        }
+        
+        .submit {
+            border: none;
+            outline: none;
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            background-color: #00bfff;
+        }
+        
+        .submit:hover {
+            background-color: #00bfff96;
+        }
+        
+        @keyframes pulse {
+            from {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+            to {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="Forgot-PW.css">
+    <script defer src="https://use.fontawesome.com/releases/v6.2.1/js/all.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="navbar-brand">Code Partner</div>
+        <nav>
+            <ul class="navbar-nav">
+                <li><a href="HomePage">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="login-block">
+        <form class="form" action="/ForgotPW" method="POST">
+            <p class="title">Forgot Password</p>
+            <p class="message">Enter your details to reset your password.</p>
+
+            <label>
+                <input class="input" name="FirstName" type="text" placeholder="" required="">
+                <span>FirstName</span>
+            </label>
+
+            <label>
+                <input class="input" name="email" type="email" placeholder="" required="">
+                <span>Email</span>
+            </label>
+
+            <label>
+                <input class="input" name="newpass" type="password" placeholder="" required="">
+                <span>New Password</span>
+            </label>
+
+            <label>
+                <input class="input" name="confnewpass" type="password" placeholder="" required="">
+                <span>Confirm New Password</span>
+            </label>
+
+            <button class="submit" type="submit">Reset Password</button>
+            <p class="signup">Remembered your password? <a href="Sign-In">Sign in</a></p>
+        </form>
+    </div>
+</body>
+
+</html>

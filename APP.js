@@ -50,6 +50,9 @@ app.get('/contact', async(req, res) => {
 app.get('/HomePage', (req, res) => {
     res.render('HomePage');
 });
+app.get('/ForgotPW', (req, res) => {
+    res.render('ForgotPW');
+});
 app.get('/Sign-Up', (req, res) => {
     res.render('Sign-Up');
 });
@@ -60,6 +63,48 @@ app.get('/Sign-Up-Student', (req, res) => {
 app.get('/Sign-In', (req, res) => {
     res.render('Sign-In');
 });
+
+app.get('/Student-Profile', (req, res) => {
+    const user = isStudent(req, res);
+    if (user) {
+        res.render('Student-Profile');
+    }
+});
+
+app.get('/Freelancer-Profile', (req, res) => {
+    const user = isFreelanser(req, res);
+    if (user) {
+        res.render('Freelancer-Profile');
+    }
+});
+
+function isFreelanser(req, res) {
+    const user = readCookie(req, "user");
+    if (!user) {
+        res.redirect("Sign-In");
+        return null;
+    }
+    return user;
+}
+
+function isAdmin(req, res) {
+    const user = readCookie(req, "user");
+    if (!user) {
+        res.redirect("Sign-In");
+        return null;
+    }
+    return user;
+}
+
+function isStudent(req, res) {
+    const user = readCookie(req, "user");
+    if (!user) {
+        res.redirect("Sign-In");
+        return null;
+    }
+    return user;
+}
+
 app.post("/Sign-Up", async(req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
@@ -96,6 +141,33 @@ app.post("/Sign-Up", async(req, res) => {
     } catch (err) {
         console.error('Error signing up:', err);
         return res.redirect('/Sign-Up');
+    }
+});
+
+app.post('/ForgotPW', async(req, res) => {
+    try {
+        const { id, email, newpass, confnewpass } = req.body;
+
+        if (newpass !== confnewpass) {
+            console.log("Passwords do not match");
+            return res.redirect("/ForgotPW");
+        }
+
+        const user = await User.findOne({ id, email });
+
+        if (!user) {
+            console.log("User doesn't exist");
+            return res.redirect("/ForgotPW");
+        }
+
+        const hashedPassword = await bcrypt.hash(newpass, saltRounds);
+        await User.updateOne({ id: user.id }, { password: hashedPassword });
+
+        console.log("Password changed successfully");
+        return res.redirect("/Sign-In");
+    } catch (err) {
+        console.log("Error:", err);
+        return res.status(500).json({ error: err.message });
     }
 });
 
