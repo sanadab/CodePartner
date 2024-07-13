@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="Log-in.css">
+    <script defer src="https://use.fontawesome.com/releases/v6.2.1/js/all.js"></script>
+    <style>
+        /* Resetting default margin and padding for all elements */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Body styles for centering content */
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Full viewport height */
+            background: linear-gradient(to bottom right, #001f3f, #5bb2e1);
+            /* Gradient background */
+            margin: 0;
+            font-family: Arial, sans-serif;
+            /* Adjust font-family as needed */
+        }
+        /* Navbar styles */
+        
+        .navbar {
+            width: 100%;
+            background-color: #333;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            /* Ensure navbar stays above other content */
+        }
+        
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        .navbar .brand {
+            font-size: 24px;
+            /* Increased font size */
+            font-weight: bold;
+            color: #fff;
+            /* White color */
+        }
+        /* Form container styling */
+        
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            /* Adjusted width */
+            padding: 30px;
+            border-radius: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            /* Adjust background color opacity */
+            color: #fff;
+            border: 1px solid #333;
+            margin-top: 80px;
+            /* Ensure form content is below navbar */
+        }
+        
+        .title {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -1px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+            color: #00bfff;
+        }
+        
+        .title::before,
+        .title::after {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            left: 0px;
+            background-color: #00bfff;
+        }
+        
+        .title::before {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .title::after {
+            width: 18px;
+            height: 18px;
+            animation: pulse 1s linear infinite;
+        }
+        
+        .message,
+        .signup {
+            font-size: 14.5px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .signup {
+            text-align: center;
+        }
+        
+        .signup a:hover {
+            text-decoration: underline royalblue;
+        }
+        
+        .signup a {
+            color: #00bfff;
+        }
+        
+        .flex {
+            display: flex;
+            width: 100%;
+            gap: 6px;
+        }
+        
+        .form label {
+            position: relative;
+        }
+        
+        .form label .input {
+            background-color: #333;
+            color: #fff;
+            width: 100%;
+            padding: 20px 5px 5px 10px;
+            outline: 0;
+            border: 1px solid rgba(105, 105, 105, 0.397);
+            border-radius: 10px;
+        }
+        
+        .form label .input+span {
+            color: rgba(255, 255, 255, 0.5);
+            position: absolute;
+            left: 10px;
+            top: 0px;
+            font-size: 0.9em;
+            cursor: text;
+            transition: 0.3s ease;
+        }
+        
+        .form label .input:placeholder-shown+span {
+            top: 12.5px;
+            font-size: 0.9em;
+        }
+        
+        .form label .input:focus+span,
+        .form label .input:valid+span {
+            color: #00bfff;
+            top: 0px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+        
+        .input {
+            font-size: medium;
+        }
+        
+        .submit {
+            border: none;
+            outline: none;
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            background-color: #00bfff;
+        }
+        
+        .submit:hover {
+            background-color: #00bfff96;
+        }
+        
+        @keyframes pulse {
+            from {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+            to {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+        
+        .forgot-password {
+            text-align: left;
+            font-size: 14.5px;
+            color: rgba(255, 255, 255, 0.7);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .forgot-password a {
+            color: #00bfff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .forgot-password a:hover {
+            text-decoration: underline;
+            color: royalblue;
+        }
+        
+        .forgot-password a::after {
+            content: '\f007';
+            font-family: 'FontAwesome';
+            margin-left: 5px;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .forgot-password a:hover::after {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="brand">Code Partner</div>
+        <a href="HomePage">Home</a>
+    </div>
+
+    <div class="login-block">
+        <form class="form" action="/Sign-In" method="POST">
+            <p class="title">Sign-In</p>
+            <p class="message">Sign in now to access your account.</p>
+
+            <label>
+                <input class="input" name="FirstName" type="name" placeholder="" required="">
+                <span>FirstName</span>
+            </label>
+
+            <label>
+                <input class="input" name="password" type="password" placeholder="" required="">
+                <span>Password</span>
+            </label>
+
+            <p class="forgot-password"><a href="ForgotPW">Forgot Password?</a></p>
+            <button class="submit" type="submit">Sign In</button>
+            <p class="signup">Don't have an account? <a href="Sign-Up">Sign up</a></p>
+        </form>
+    </div>
+</body>
+
+</html>
