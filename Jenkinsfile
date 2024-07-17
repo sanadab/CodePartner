@@ -1,57 +1,73 @@
 pipeline {
     agent any
-
     environment {
-        registry = "noor2323/myproj"
-        registryCredential = "docker_hub"
-        dockerImage = "myproj"
-        git_repo='https://github.com/BS-PMC-2024/BS-PMC-2024-Team27/'
-        test_path='test/'
+        dockerImage = 'noor2323/myproj:latest'
+        git_repo = 'https://github.com/BS-PMC-2024/BS-PMC-2024-Team27/'
+        test_path = 'test/'
     }
-
     stages {
-        stage('Build and Push Image') {
+        stage('Run Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${registry}:${BUILD_NUMBER}")
-                    docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
-                        dockerImage.push()
+                    docker.run("-v /logs:/app/logs -p 3000:3000 ${dockerImage}")
+
+                }
+            }
+        }
+
+        stage('Install npm Dependencies') {
+            steps {
+                script {
+                    try {
+                        dir(test_path) {
+                            bat "npm install"
+                        }
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        echo "Failed to install npm dependencies: ${e.message}"
+                        throw e
                     }
                 }
             }
         }
-        stage('run the docker Image') {
+
+        stage('Run npm Tests') {
             steps {
                 script {
-                    bat "docker run --name temp_container -v /logs:/app/logs -p 3000:3000 $dockerImage"
+                    try {
+                        dir(test_path) {
+                            // Run npm tests
+                            bat "npm test"
+                        }
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        echo "Failed to run npm tests: ${e.message}"
+                        throw e
+                    }
                 }
             }
         }
-        stage('install npm') {
-            steps {
-                bat "npm install"
-            }
-        }
-        stage('unitest the code') {
-            steps {
-                bat "npm test"
-            }
-        }
+        
     }
 
     post {
         success {
             script {
-                bat "docker rm temp_container"
-                bat "docker rmi ${registry}:${BUILD_NUMBER}"
-                bat "everything went well"
+                try {
+                    // Cleanup after successful build and tests
+                    bat "docker rm temp_container"
+                    bat "docker rmi ${registry}:${BUILD_NUMBER}"
+                    echo "Everything went well!"
+                } catch (Exception e) {
+                    echo "Failed to clean up Docker containers/images: ${e.message}"
+                    echo "Everything went well but with cleanup issues!"
+                }
             }
         }
         failure {
-          script {
-            bat "something went wrong!"
-          }
+            script {
+                echo "Something went wrong!"
+            }
         }
-        
     }
 }
