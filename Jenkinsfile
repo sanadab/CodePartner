@@ -5,6 +5,8 @@ pipeline {
         registry = "noor2323/myproj"
         registryCredential = "docker_hub"
         dockerImage = "myproj"
+        git_repo='https://github.com/BS-PMC-2024/BS-PMC-2024-Team27/'
+        test_path='test/'
     }
 
     stages {
@@ -16,6 +18,23 @@ pipeline {
                         dockerImage.push()
                     }
                 }
+            }
+        }
+        stage('run the docker Image') {
+            steps {
+                script {
+                    bat "docker run -v /logs:/app/logs -p 3000:3000 $dockerImage"
+                }
+            }
+        }
+        stage('install npm') {
+            steps {
+                bat "npm install"
+            }
+        }
+        stage('unitest the code') {
+            steps {
+                bat "npm test"
             }
         }
     }
