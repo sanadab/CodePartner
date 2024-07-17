@@ -2,7 +2,7 @@ pipeline {
   environment {
     registry="noor2323/myproj"
     registryCredential="docker_hub"
-    dockerImage="
+  
     }
   stage('build and push image') {
     steps{
