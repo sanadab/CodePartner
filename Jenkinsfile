@@ -23,7 +23,7 @@ pipeline {
         stage('run the docker Image') {
             steps {
                 script {
-                    bat "docker run -v /logs:/app/logs -p 3000:3000 $dockerImage"
+                    bat "docker run --name temp_container -v /logs:/app/logs -p 3000:3000 $dockerImage"
                 }
             }
         }
@@ -42,6 +42,7 @@ pipeline {
     post {
         success {
             script {
+                bat "docker rm temp_container"
                 bat "docker rmi ${registry}:${BUILD_NUMBER}"
                 bat "everything went well"
             }
