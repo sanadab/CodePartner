@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry="noorwa1/my-app"
+    registry="noor2323/myproj"
     registryCredential="docker_hub"
     dockerImage="
     }
