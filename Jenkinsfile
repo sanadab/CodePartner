@@ -4,6 +4,7 @@ pipeline {
     registryCredential="docker_hub"
     dockerImage="myproj"
     }
+  stages{
   stage('build and push image') {
     steps{
       dockerImage=docker.build registry+":$BUILD_NUMBER"
@@ -11,6 +12,7 @@ pipeline {
       dockerImage.push()                    
       }
     }
+  }
   }
   post{
     always{
