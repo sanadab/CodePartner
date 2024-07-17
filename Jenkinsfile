@@ -6,12 +6,14 @@ pipeline {
         test_path = 'test/'
     }
     stages {
+
         stage('Run Docker Image') {
             steps {
-                script {
-                    docker.run("-v /logs:/app/logs -p 3000:3000 ${dockerImage}")
 
-                }
+                    bat "docker --version"
+                    bat "docker run -d --name temp_container -v /logs:/app/logs -p 3000:3000 ${dockerImage}"
+
+                
             }
         }
 
@@ -51,12 +53,16 @@ pipeline {
     }
 
     post {
+        always{
+            script {
+                bat "docker kill temp_container"
+            }
+        }
         success {
             script {
                 try {
                     // Cleanup after successful build and tests
                     bat "docker rm temp_container"
-                    bat "docker rmi ${registry}:${BUILD_NUMBER}"
                     echo "Everything went well!"
                 } catch (Exception e) {
                     echo "Failed to clean up Docker containers/images: ${e.message}"
