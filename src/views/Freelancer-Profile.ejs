@@ -212,54 +212,78 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/openai/dist/openai.browser.min.js"></script>
     <script>
-        // Function to add a message to the chat display
-        function appendMessage(from, message, className) {
-            const chatDisplay = document.getElementById('chat-display');
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message', className);
-            messageElement.innerHTML = `<strong>${from}:</strong> ${message}`;
-            chatDisplay.appendChild(messageElement);
+        const apiUrl = 'https://api.openai.com/v1/chat/completions';
+        const apiKey = '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'; // Replace with your OpenAI API key
 
-            // Scroll to the bottom of the chat display
-            chatDisplay.scrollTop = chatDisplay.scrollHeight;
-        }
+        document.getElementById('send-btn').addEventListener('click', async() => {
+            const userMessage = document.getElementById('user-input').value;
+            if (!userMessage.trim()) return; // Prevent sending empty messages
 
-        // Function to handle user message submission
-        function handleUserInput() {
-            const userInput = document.getElementById('user-input').value;
-            appendMessage('You', userInput, 'user');
-
-            // Call OpenAI API to get response
-            openai.completions.create({
-                    model: 'davinci',
-                    prompt: userInput,
-                    max_tokens: 150
-                })
-                .then(response => {
-                    const botResponse = response.data.choices[0].text.trim();
-                    appendMessage('Bot', botResponse, 'ai');
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    appendMessage('System', 'An error occurred. Please try again later.', 'system');
-                });
-
-            // Clear input field after sending message
+            addMessage(userMessage, 'user');
+            const aiResponse = await getAIResponse(userMessage);
+            addMessage(aiResponse, 'ai');
             document.getElementById('user-input').value = '';
-        }
-
-        // Event listener for send button click
-        document.getElementById('send-btn').addEventListener('click', handleUserInput);
-
-        // Event listener for Enter key press in the input field
-        document.getElementById('user-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                handleUserInput();
-            }
         });
 
+        async function getAIResponse(userMessage) {
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${apiKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: 'gpt-3.5-turbo', // You can use 'gpt-4' if you have access to it
+                        messages: [{
+                            role: 'user',
+                            content: userMessage
+                        }]
+                    })
+                });
+
+                if (response.status === 503) {
+                    addMessage("Service unavailable. Please try again later.", 'ai');
+                    return;
+                }
+
+                if (response.status === 403) {
+                    addMessage("Forbidden: You might not have permission to access this model.", 'ai');
+                    return;
+                }
+
+                if (response.status === 429) {
+                    addMessage("Too many requests. Please try again later.", 'ai');
+                    return;
+                }
+
+                if (response.status === 401) {
+                    addMessage("Unauthorized: Check your API key and permissions.", 'ai');
+                    return;
+                }
+
+                const data = await response.json();
+
+                if (data && data.choices && data.choices.length > 0 && data.choices[0].message && data.choices[0].message.content) {
+                    return data.choices[0].message.content.trim();
+                } else {
+                    return "Sorry, I didn't understand that.";
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                return "Sorry, there was an error.";
+            }
+        }
+
+        function addMessage(text, sender) {
+            const chatDisplay = document.getElementById('chat-display');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender);
+            messageDiv.textContent = text;
+            chatDisplay.appendChild(messageDiv);
+            chatDisplay.scrollTop = chatDisplay.scrollHeight;
+        }
         // Function to handle rating selection
         document.querySelectorAll('.star').forEach(star => {
             star.addEventListener('click', function() {

@@ -15,6 +15,8 @@ const { setCookie, readCookie, editCookie, deleteCookie } = require("../cookies.
 // import path from 'path';
 const app = express();
 const saltRounds = 10;
+app.use(bodyParser.json());
+
 
 // Set views directory
 app.set('views', path.join(__dirname, 'views'));
