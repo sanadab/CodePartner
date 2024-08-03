@@ -89,6 +89,9 @@ app.get('/Sign-Up-Student', (req, res) => {
 app.get('/Sign-In', (req, res) => {
     res.render('Sign-In');
 });
+app.get('/Sign-In2', (req, res) => {
+    res.render('Sign-In');
+});
 
 app.get('/Student-Profile', async(req, res) => {
     const user = isStudent(req, res);
