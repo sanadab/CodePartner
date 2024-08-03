@@ -102,10 +102,13 @@ app.get('/Student-Profile', async(req, res) => {
 
 });
 
-app.get('/Freelancer-Profile', (req, res) => {
+app.get('/Freelancer-Profile', async(req, res) => {
     const user = isFreelanser(req, res);
+    const apiDoc = await api.findOne({});
+    const api1 = apiDoc.api_key;
+
     if (user) {
-        res.render('Freelancer-Profile');
+        res.render('Freelancer-Profile', { api1 });
     }
 });
 app.get('/Admin-Profile', (req, res) => {
