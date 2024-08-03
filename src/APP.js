@@ -128,6 +128,42 @@ app.get('/View-Users', async(req, res) => {
         res.status(500).send("Error retrieving users");
     }
 });
+app.get('/add-req', (req, res) => {
+    res.render('add-req');
+});
+app.post("/add-req", async(req, res) => {
+    try {
+        const userCookie = req.cookies.user;
+
+        if (!userCookie) {
+            console.log("User not logged in");
+            return res.redirect('/Sign-In'); // Redirect to sign-in if no user cookie
+        }
+
+        const user = JSON.parse(userCookie);
+
+        const newUser1 = new req1({
+            Projectname: req.body.Projectname,
+            Issue: req.body.Issue,
+            Description: req.body.Description,
+            Childissue: req.body.Childissue,
+            Priorety: req.body.Priorety,
+            userId: user._id // Associate the request with the user ID
+        });
+
+        await newUser1.save();
+
+        console.log("Data saved successfully:");
+        console.log(newUser1);
+
+        return res.redirect('/add-req');
+
+    } catch (err) {
+        console.error("Error saving data:", err);
+        return res.status(500).send("Internal Server Error");
+    }
+});
+
 
 function isFreelanser(req, res) {
     const user = readCookie(req, "user");
