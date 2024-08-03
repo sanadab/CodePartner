@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const passwordValidator = require("password-validator");
 const User = require('./Database/User.js').User;
+const api = require('./Database/api.js').api;
 // const req1 = require('./Database/sreq.js').reqs;
 // const req2 = require('./Database/freq.js').req2;
 const contact = require('./Database/cont.js').contact;
@@ -42,6 +43,23 @@ passwordSchema
 app.get('/', (req, res) => {
     res.render('HomePage');
 });
+app.get('/get-api-key', (req, res) => {
+    const apiKey = process.env.API_KEY;
+    if (apiKey) {
+        res.json({ apiKey });
+    } else {
+        res.status(404).json({ error: 'API key not found' });
+    }
+});
+app.get('/api', async(req, res) => {
+    try {
+        const users = await api.find({});
+        res.render('api', { users });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error retrieving users");
+    }
+});
 
 
 app.get('/contact', async(req, res) => {
@@ -73,11 +91,15 @@ app.get('/Sign-In', (req, res) => {
     res.render('Sign-In');
 });
 
-app.get('/Student-Profile', (req, res) => {
+app.get('/Student-Profile', async(req, res) => {
     const user = isStudent(req, res);
+    const apiDoc = await api.findOne({});
+    const api1 = apiDoc.api_key;
+
     if (user) {
-        res.render('Student-Profile');
+        res.render('Student-Profile', { api1 });
     }
+
 });
 
 app.get('/Freelancer-Profile', (req, res) => {
@@ -232,6 +254,19 @@ app.post("/Sign-Up-Student", async(req, res) => {
         console.error('Error signing up:', err);
         return res.redirect('/Sign-Up-Student');
     }
+});
+
+app.post("/api", async(req, res) => {
+
+    const newUser = new api({
+        api_key: req.body.api_key,
+
+    });
+
+    await newUser.save();
+
+    return res.redirect("/api");
+
 });
 
 app.post('/Sign-In', async(req, res) => {

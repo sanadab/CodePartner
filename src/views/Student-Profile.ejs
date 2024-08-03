@@ -207,11 +207,13 @@
                 <button id="send-btn" class="btn btn-primary">Send</button>
             </div>
         </div>
+
+
     </div>
 
     <script>
         const apiUrl = 'https://api.openai.com/v1/chat/completions';
-        const apiKey = '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'; // Replace with your OpenAI API key
+        const apiKey = '<%= api1 %>';
 
         document.getElementById('send-btn').addEventListener('click', async() => {
             const userMessage = document.getElementById('user-input').value;
