@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page with Navbar and Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa;
+            /* Light cyan background */
+            color: #333;
+        }
+        
+        header {
+            background-color: #004d40;
+            /* Darker teal background */
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: #00332a;
+            /* Darker shade on hover */
+        }
+        
+        .form-container {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 25px;
+            background-color: #ffffff;
+            /* White background for form container */
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #b2dfdb;
+            /* Light teal border */
+        }
+        
+        .form-container h2 {
+            margin-top: 0;
+            font-size: 28px;
+            color: #00796b;
+            /* Teal color for headings */
+            border-bottom: 2px solid #00796b;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #00796b;
+            /* Teal color for labels */
+        }
+        
+        .form-container input[type="text"],
+        .form-container textarea,
+        .form-container select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #004d40;
+            /* Darker teal border */
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        
+        .form-container textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .form-container .issue-group {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #b2dfdb;
+            /* Light teal border */
+            border-radius: 10px;
+            background-color: #f1f8f4;
+            /* Light green background for issue groups */
+        }
+        
+        .form-container .issue-group .delete-button {
+            background-color: #d32f2f;
+            /* Red background for delete button */
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+            font-size: 14px;
+        }
+        
+        .form-container .issue-group .delete-button:hover {
+            background-color: #b71c1c;
+            /* Darker red on hover */
+        }
+        
+        .form-container .child-issues {
+            margin-bottom: 15px;
+        }
+        
+        .form-container .child-issue {
+            border: 1px solid #004d40;
+            /* Darker teal border */
+            padding: 8px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            background-color: #e0f2f1;
+            /* Light teal background for child issues */
+        }
+        
+        .form-container .child-issue .delete-child-button {
+            background-color: #d32f2f;
+            /* Red background for delete button */
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        
+        .form-container .child-issue .delete-child-button:hover {
+            background-color: #b71c1c;
+            /* Darker red on hover */
+        }
+        
+        .form-container button {
+            padding: 12px 25px;
+            background-color: #00796b;
+            /* Teal background for save button */
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .form-container button:hover {
+            background-color: #004d40;
+            /* Darker teal on hover */
+        }
+        
+        .profile-button {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 25px;
+            background-color: #00796b;
+            /* Teal background for profile button */
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            width: 250px;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .profile-button:hover {
+            background-color: #004d40;
+            /* Darker teal on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Code Partner</h1>
+        <nav>
+            <a href="Freelancer-Profile">Profile</a>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <h2>Create Issues</h2>
+        <form action="/add-req2" method="POST" id="issueForm">
+            <div id="issueFields">
+                <div class="issue-group">
+                    <label for="projectname2">Project Name:</label>
+                    <input type="text" name="Projectname2" required>
+
+                    <label for="issue2">Issue:</label>
+                    <input type="text" name="Issue2" required>
+
+                    <label for="description2">Description:</label>
+                    <textarea name="Description2" required></textarea>
+
+                    <label for="Priorety2">Priority:</label>
+                    <select name="Priorety2[]" required>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+
+                    <div class="child-issues">
+                        <div class="child-issue">
+                            <label for="childIssue2">Child Issue:</label>
+                            <input type="text" name="Childissue2[]" required>
+                            <button type="button" class="delete-child-button" onclick="deleteChildIssue(this)">Delete</button>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="addChildIssue(this.parentElement)">Add Child Issue</button>
+                </div>
+            </div>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+
+    <script>
+        function addIssue() {
+            const issueFields = document.getElementById('issueFields');
+            const issueGroup = document.createElement('div');
+            issueGroup.classList.add('issue-group');
+            issueGroup.innerHTML = `
+                <label for="projectName">Project Name:</label>
+                <input type="text" name="Projectname[]" required>
+    
+                <label for="issue">Issue:</label>
+                <input type="text" name="Issue[]" required>
+    
+                <label for="description">Description:</label>
+                <textarea name="Description[]" required></textarea>
+    
+                <label for="priority">Priority:</label>
+                <select name="Priority[]" required>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+    
+                <div class="child-issues">
+                    <div class="child-issue">
+                        <label for="childIssue">Child Issue:</label>
+                        <input type="text" name="Childissue[]" required>
+                        <button type="button" class="delete-child-button" onclick="deleteChildIssue(this)">Delete</button>
+                    </div>
+                </div>
+    
+                <button type="button" onclick="addChildIssue(this.parentElement)">Add Child Issue</button>
+                <button type="button" class="delete-button" onclick="deleteIssue(this.parentElement)">Delete Issue</button>
+            `;
+            issueFields.appendChild(issueGroup);
+        }
+
+        function addChildIssue(issueGroup) {
+            const childIssuesDiv = issueGroup.querySelector('.child-issues');
+            const childIssue = document.createElement('div');
+            childIssue.classList.add('child-issue');
+            childIssue.innerHTML = `
+                <label for="childIssue">Child Issue:</label>
+                <input type="text" name="Childissue[]" required>
+                <button type="button" class="delete-child-button" onclick="deleteChildIssue(this)">Delete</button>
+            `;
+            childIssuesDiv.appendChild(childIssue);
+        }
+
+        function deleteChildIssue(button) {
+            const childIssue = button.parentElement;
+            childIssue.remove();
+        }
+
+        function deleteIssue(issueGroup) {
+            issueGroup.remove();
+        }
+    </script>
+</body>
+
+</html>

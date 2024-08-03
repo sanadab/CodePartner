@@ -8,7 +8,7 @@ const passwordValidator = require("password-validator");
 const User = require('./Database/User.js').User;
 const api = require('./Database/api.js').api;
 // const req1 = require('./Database/sreq.js').reqs;
-// const req2 = require('./Database/freq.js').req2;
+const req2 = require('./Database/freq.js').req2;
 const contact = require('./Database/cont.js').contact;
 const cookieParser = require("cookie-parser");
 const { setCookie, readCookie, editCookie, deleteCookie } = require("../cookies.js");
@@ -130,6 +130,60 @@ app.get('/View-Users', async(req, res) => {
 });
 app.get('/add-req', (req, res) => {
     res.render('add-req');
+});
+app.get('/add-req2', (req, res) => {
+    res.render('add-req2');
+});
+app.get('/view-project2', async(req, res) => {
+    try {
+        const userCookie = req.cookies.user;
+        let users = [];
+
+        if (userCookie) {
+            const user = JSON.parse(userCookie);
+            // Fetch projects associated with the logged-in user
+            users = await req2.find({ userId: user._id });
+        } else {
+            users = await req2.find({});
+        }
+
+        res.render('view-project2', { users });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error retrieving projects");
+    }
+});
+app.post("/add-req2", async(req, res) => {
+    try {
+        const userCookie = req.cookies.user;
+
+        if (!userCookie) {
+            console.log("User not logged in");
+            return res.redirect('/Sign-In'); // Redirect to sign-in if no user cookie
+        }
+
+        const user = JSON.parse(userCookie);
+
+        const newUser1 = new req2({
+            Projectname2: req.body.Projectname2,
+            Issue2: req.body.Issue2,
+            Description2: req.body.Description2,
+            Childissue2: req.body.Childissue2,
+            Priorety2: req.body.Priorety2,
+            userId: user._id // Associate the request with the user ID
+        });
+
+        await newUser1.save();
+
+        console.log("Data saved successfully:");
+        console.log(newUser1);
+
+        return res.redirect('/add-req2');
+
+    } catch (err) {
+        console.error("Error saving data:", err);
+        return res.status(500).send("Internal Server Error");
+    }
 });
 app.post("/add-req", async(req, res) => {
     try {

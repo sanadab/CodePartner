@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Users</title>
+    <style>
+        /* Global Styles */
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f0f0;
+            /* Fallback */
+            background: linear-gradient(to bottom right, #001f3f, #5bb2e1);
+            /* Gradient */
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* Navbar Styles */
+        
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            padding: 10px 0;
+        }
+        
+        .navbar-brand {
+            float: left;
+            color: #f4f4f4;
+            font-size: 24px;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        
+        .navbar-brand:hover {
+            background-color: #444;
+        }
+        
+        .profile-button {
+            float: right;
+            color: #f4f4f4;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        
+        .profile-button:hover {
+            background-color: #444;
+        }
+        /* Page Title */
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        /* Table Styles */
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        
+        th,
+        td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #333;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e9ecef;
+        }
+        /* Dropdown Style */
+        
+        .filter-dropdown {
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 200px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        /* Button Style (optional) */
+        
+        .apply-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        
+        .apply-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="#" class="navbar-brand">Code Partner</a>
+        <a href="Freelancer-Profile" class="profile-button">Profile</a>
+    </div>
+
+    <div class="container">
+        <h1>All Projects</h1>
+
+        <!-- Filter Dropdown -->
+        <select id="filterDropdown" class="filter-dropdown">
+            <option value="all">Show All</option>
+            <% users.forEach(user => { %>
+            <option value="<%= user.Projectname2 %>"><%= user.Projectname2 %></option>
+            
+            <!-- Add more options as needed -->
+            <% }); %>
+        </select>
+        <button class="apply-button" onclick="applyFilter()">Apply Filter</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Project Name</th>
+                    <th>Issue</th>
+                    <th>Description</th>
+                    <th>Child Issue</th>
+                    <th>Priority</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                <!-- Example of dynamic data with server-side templating -->
+                <!-- Replace <%= %> with actual template tags used in your server-side framework -->
+                <% users.forEach(user => { %>
+                    <tr>
+                        <td>
+                            <%= user.Projectname2 %>
+                        </td>
+                        <td>
+                            <%= user.Issue2 %>
+                        </td>
+                        <td>
+                            <%= user.Description2 %>
+                        </td>
+                        <td>
+                            <%= user.Childissue2 %>
+                        </td>
+                        <td>
+                            <%= user.Priorety2 %>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- JavaScript for filtering -->
+    <script>
+        function applyFilter() {
+            var filter = document.getElementById('filterDropdown').value;
+            var rows = document.getElementById("userTableBody").getElementsByTagName("tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var projectName = rows[i].getElementsByTagName("td")[0].innerText.toLowerCase();
+
+                if (filter === 'all') {
+                    rows[i].style.display = "";
+                } else if (projectName !== filter) {
+                    rows[i].style.display = "none";
+                } else {
+                    rows[i].style.display = "";
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
