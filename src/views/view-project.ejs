@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Users</title>
+    <style>
+        /* Global Styles */
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f0f0;
+            background: linear-gradient(to bottom right, #001f3f, #5bb2e1);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            padding: 10px 0;
+        }
+        
+        .navbar-brand {
+            float: left;
+            color: #f4f4f4;
+            font-size: 24px;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        
+        .navbar-brand:hover {
+            background-color: #444;
+        }
+        
+        .profile-button {
+            float: right;
+            color: #f4f4f4;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        
+        .profile-button:hover {
+            background-color: #444;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        
+        th,
+        td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #333;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e9ecef;
+        }
+        
+        .filter-dropdown {
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 200px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        
+        .apply-button,
+        .search-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        
+        .apply-button:hover,
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+        
+        .delete-button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+        
+        .search-container {
+            display: flex;
+            margin-bottom: 20px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .search-input {
+            padding: 10px;
+            font-size: 16px;
+            flex: 1;
+            max-width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="#" class="navbar-brand">Code Partner</a>
+        <a href="Student-Profile" class="profile-button">Profile</a>
+    </div>
+
+    <div class="container">
+        <h1>All Projects</h1>
+
+        <!-- Search Input -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search projects...">
+            <button class="search-button" onclick="searchProjects()">Search</button>
+        </div>
+
+        <!-- Filter Dropdown -->
+        <select id="filterDropdown" class="filter-dropdown">
+            <option value="all">Show All</option>
+            <% users.forEach(user => { %>
+            <option value="<%= user.Projectname %>"><%= user.Projectname %></option>
+            <% }); %>
+        </select>
+        <button class="apply-button" onclick="applyFilter()">Apply Filter</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Project Name</th>
+                    <th>Issue</th>
+                    <th>Description</th>
+                    <th>Child Issue</th>
+                    <th>Priority</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                <% users.forEach(user => { %>
+                    <tr>
+                        <td>
+                            <%= user.Projectname %>
+                        </td>
+                        <td>
+                            <%= user.Issue %>
+                        </td>
+                        <td>
+                            <%= user.Description %>
+                        </td>
+                        <td>
+                            <%= user.Childissue %>
+                        </td>
+                        <td>
+                            <%= user.Priorety %>
+                        </td>
+                        <td>
+                            <button class="delete-button" onclick="deleteRow(this)">Delete</button>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- JavaScript for filtering and search -->
+    <script>
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function applyFilter() {
+            var filter = document.getElementById('filterDropdown').value;
+            setCookie('filter', filter, 7); // Save filter to cookie for 7 days
+            var rows = document.getElementById("userTableBody").getElementsByTagName("tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var projectName = rows[i].getElementsByTagName("td")[0].innerText.toLowerCase();
+                if (filter === 'all') {
+                    rows[i].style.display = "";
+                } else if (projectName !== filter) {
+                    rows[i].style.display = "none";
+                } else {
+                    rows[i].style.display = "";
+                }
+            }
+        }
+
+        function applySavedFilter() {
+            var savedFilter = getCookie('filter');
+            if (savedFilter) {
+                document.getElementById('filterDropdown').value = savedFilter;
+                applyFilter();
+            }
+        }
+
+        function deleteRow(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
+        function searchProjects() {
+            var searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            var rows = document.getElementById("userTableBody").getElementsByTagName("tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var projectName = rows[i].getElementsByTagName("td")[0].innerText.toLowerCase();
+                var issue = rows[i].getElementsByTagName("td")[1].innerText.toLowerCase();
+                var description = rows[i].getElementsByTagName("td")[2].innerText.toLowerCase();
+                var childIssue = rows[i].getElementsByTagName("td")[3].innerText.toLowerCase();
+                var priority = rows[i].getElementsByTagName("td")[4].innerText.toLowerCase();
+
+                if (projectName.includes(searchQuery) || issue.includes(searchQuery) || description.includes(searchQuery) || childIssue.includes(searchQuery) || priority.includes(searchQuery)) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+
+        window.onload = applySavedFilter;
+    </script>
+</body>
+
+</html>

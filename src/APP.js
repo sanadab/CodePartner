@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer');
 const passwordValidator = require("password-validator");
 const User = require('./Database/User.js').User;
 const api = require('./Database/api.js').api;
-// const req1 = require('./Database/sreq.js').reqs;
+const req1 = require('./Database/sreq.js').reqs;
 const req2 = require('./Database/freq.js').req2;
 const contact = require('./Database/cont.js').contact;
 const cookieParser = require("cookie-parser");
@@ -153,6 +153,28 @@ app.get('/view-project2', async(req, res) => {
         res.status(500).send("Error retrieving projects");
     }
 });
+
+app.get('/view-project', async(req, res) => {
+    try {
+        const userCookie = req.cookies.user;
+        let users = [];
+
+        if (userCookie) {
+            const user = JSON.parse(userCookie);
+            // Fetch projects associated with the logged-in user
+            users = await req1.find({ userId: user._id });
+        } else {
+            users = await req1.find({});
+        }
+
+        res.render('view-project', { users });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error retrieving projects");
+    }
+});
+
+
 app.post("/add-req2", async(req, res) => {
     try {
         const userCookie = req.cookies.user;
