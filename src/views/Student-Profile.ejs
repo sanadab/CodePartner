@@ -155,6 +155,15 @@
             background-color: #0056b3;
         }
         
+        #typing-indicator {
+            background-color: #444;
+            color: #aaa;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin-bottom: 6px;
+            max-width: 70%;
+        }
+        
         .rating {
             display: flex;
             gap: 5px;
@@ -180,14 +189,14 @@
         <div class="ms-auto d-flex align-items-center">
             <a href="view-project" class="navbar-btn">View List</a>
             <a href="add-req" class="navbar-btn">Add Requirements</a>
+            <a href="HomePage1" class="navbar-btn">Home</a>
             <a href="/logout" class="navbar-btn btn btn-danger">Log Out</a>
         </div>
     </nav>
 
     <div class="container">
         <div class="content">
-            <h2>Welcome to Code Partner</h2>
-            <p>This is a sample student profile page.</p>
+            <h2 class="display-6" style="color: #5bb2e1;">Welcome to Code Partner</h2>
         </div>
         <div class="content mt-4">
             <h3>Rate our website:</h3>
@@ -201,18 +210,18 @@
             <div id="rating-message" class="text-primary mt-2"></div>
         </div>
         <div id="chat-container" class="content mt-4">
-            <div id="chat-display" class="mb-3"></div>
+            <h4>Chat with AI</h4>
+            <div id="chat-display" class="mb-3">
+            </div>
+            <div id="typing-indicator" class="message ai" style="display: none;">Typing...</div>
             <div class="input-group">
                 <input type="text" id="user-input" class="form-control" placeholder="Type your message...">
                 <button id="send-btn" class="btn btn-primary">Send</button>
             </div>
         </div>
-
-
     </div>
 
     <script>
-        //hiiiii
         const apiUrl = 'https://api.openai.com/v1/chat/completions';
         const apiKey = '<%= api1 %>';
 
@@ -221,7 +230,9 @@
             if (!userMessage.trim()) return; // Prevent sending empty messages
 
             addMessage(userMessage, 'user');
+            document.getElementById('typing-indicator').style.display = 'block'; // Show typing indicator
             const aiResponse = await getAIResponse(userMessage);
+            document.getElementById('typing-indicator').style.display = 'none'; // Hide typing indicator
             addMessage(aiResponse, 'ai');
             document.getElementById('user-input').value = '';
         });
@@ -284,6 +295,7 @@
             chatDisplay.appendChild(messageDiv);
             chatDisplay.scrollTop = chatDisplay.scrollHeight;
         }
+
         // Function to handle rating selection
         document.querySelectorAll('.star').forEach(star => {
             star.addEventListener('click', function() {

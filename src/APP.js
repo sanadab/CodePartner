@@ -92,6 +92,10 @@ app.get('/Sign-In', (req, res) => {
 app.get('/Sign-In2', (req, res) => {
     res.render('Sign-In');
 });
+app.get('/HomePage1', (req, res) => {
+    res.render('HomePage1');
+});
+
 
 app.get('/Student-Profile', async(req, res) => {
     const user = isStudent(req, res);
@@ -103,7 +107,26 @@ app.get('/Student-Profile', async(req, res) => {
     }
 
 });
+app.post('/HomePage', async(req, res) => {
+    try {
+        console.log("Form submission received:", req.body);
 
+        const newContact = new contact({
+            Name: req.body.Name,
+            Message: req.body.Message,
+            Email: req.body.Email,
+        });
+
+        await newContact.save();
+
+        console.log("Data saved successfully:", newContact);
+        return res.redirect('/HomePage');
+
+    } catch (err) {
+        console.error("Error saving data:", err);
+        return res.status(500).send("Internal Server Error");
+    }
+});
 app.get('/Freelancer-Profile', async(req, res) => {
     const user = isFreelanser(req, res);
     const apiDoc = await api.findOne({});
@@ -153,7 +176,16 @@ app.get('/view-project2', async(req, res) => {
         res.status(500).send("Error retrieving projects");
     }
 });
-
+app.delete('/delete-message/:id', async(req, res) => {
+    try {
+        const { id } = req.params;
+        await contact.findByIdAndDelete(id);
+        res.json({ success: true });
+    } catch (err) {
+        console.error('Error deleting message:', err);
+        res.json({ success: false });
+    }
+});
 app.get('/view-project', async(req, res) => {
     try {
         const userCookie = req.cookies.user;
@@ -170,8 +202,8 @@ app.get('/view-project', async(req, res) => {
         res.render('view-project', { users });
     } catch (err) {
         console.error(err);
-        res.status(500).send("Error retrieving projects");
-    }
+        res.status(500).send("Error retrieving projects");    
+    }
 });
 
 
@@ -419,6 +451,10 @@ app.post('/Sign-In', async(req, res) => {
 });
 
 
+app.get('/logout', (req, res) => {
+    res.clearCookie('user'); // Clear the user cookie
+    res.redirect('/Sign-In'); // Redirect to the sign-in page
+});
 
 
 module.exports = app;
