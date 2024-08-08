@@ -95,6 +95,12 @@ app.get('/Sign-In2', (req, res) => {
 app.get('/HomePage1', (req, res) => {
     res.render('HomePage1');
 });
+app.get('/HomePage2', (req, res) => {
+    res.render('HomePage2');
+});
+app.get('/HomePage3', (req, res) => {
+    res.render('HomePage3');
+});
 
 
 app.get('/Student-Profile', async(req, res) => {
