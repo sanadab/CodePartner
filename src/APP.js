@@ -103,6 +103,8 @@ app.get('/HomePage3', (req, res) => {
 });
 
 
+
+
 app.get('/Student-Profile', async(req, res) => {
     const user = isStudent(req, res);
     const apiDoc = await api.findOne({});
@@ -186,6 +188,16 @@ app.delete('/delete-message/:id', async(req, res) => {
     try {
         const { id } = req.params;
         await contact.findByIdAndDelete(id);
+        res.json({ success: true });
+    } catch (err) {
+        console.error('Error deleting message:', err);
+        res.json({ success: false });
+    }
+});
+app.delete('/delete-message4/:id', async(req, res) => {
+    try {
+        const { id } = req.params;
+        await User.findByIdAndDelete(id);
         res.json({ success: true });
     } catch (err) {
         console.error('Error deleting message:', err);

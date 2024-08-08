@@ -144,6 +144,7 @@
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Roll</th>
+                    <th>Block</th>
                 </tr>
             </thead>
             <tbody id="userTableBody">
@@ -162,6 +163,10 @@
                         </td>
                         <td>
                             <%= user.Roll %>
+                        </td>
+                        <td>
+                            <button class="delete-button" onclick="deleteMessage('<%= user._id %>')">Delete</button>
+                            
                         </td>
                     </tr>
                     <% }); %>
@@ -195,6 +200,19 @@
         document.addEventListener('DOMContentLoaded', function() {
             applyFilter();
         });
+        function deleteMessage(id) {
+            fetch(`/delete-message4/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Error deleting message');
+                    }
+                });
+        }
     </script>
 </body>
 
