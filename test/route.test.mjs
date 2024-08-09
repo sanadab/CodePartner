@@ -45,5 +45,24 @@ describe('Route Tests', () => {
         const res = await request(app).get('/Freelancer-Profile');
         expect(res).to.have.status(302);
     });
-
+    it('responds to /HomePage1', async() => {
+        const res = await request(app).get('/HomePage1');
+        expect(res).to.have.status(200);
+    });
+    it('responds to /HomePage2', async() => {
+        const res = await request(app).get('/HomePage2');
+        expect(res).to.have.status(200);
+    });
+    it('responds to /HomePage3', async() => {
+        const res = await request(app).get('/HomePage3');
+        expect(res).to.have.status(200);
+    });
+    it('responds to /AI-ins', async() => {
+        const res = await request(app).get('/AI-ins');
+        expect(res).to.have.status(200);
+    });
+    it('responds to /learning', async() => {
+        const res = await request(app).get('/learning');
+        expect(res).to.have.status(200);
+    });
 });
