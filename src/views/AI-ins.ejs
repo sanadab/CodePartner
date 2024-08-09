@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Code Partner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <link rel="icon" href="images/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <script defer src="https://use.fontawesome.com/releases/v6.2.1/js/all.js"></script>
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: "Poppins", sans-serif;
+        }
+        
+        body {
+            font-size: 16px;
+            background: linear-gradient(to bottom right, #001f3f, #5bb2e1);
+            margin-left: -40px;
+        }
+        
+        .content {
+            margin-top: 70px;
+            padding: 20px;
+            color: white;
+            /* Change text color for the entire content */
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar h1 {
+            margin-left: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .navbar a {
+            margin: 0 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        
+        .navbar a:hover {
+            background-color: #495057;
+            color: #00bfff;
+        }
+        
+        .navbar-btn {
+            /* background-color: #00bfff; */
+            border-color: #6c757d;
+        }
+        
+        .btn-primary {
+            background-color: #5bb2e1;
+            border-color: #5bb2e1;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        
+        .btn-danger {
+            background-color: #5193da;
+            border-color: #5bb2e1;
+        }
+        
+        .btn-danger:hover {
+            background-color: #5bb2e1;
+            border-color: #5bb2e1;
+        }
+        
+        .text-primary {
+            color: #c8deea;
+            /* Color for the "About Us" and "Contact" headings */
+        }
+        
+        .container {
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        /* Change color of the "Welcome" heading */
+        
+        .display-4 {
+            color: #5bb2e1;
+        }
+        /* Change color of dropdown items */
+        
+        .dropdown-item {
+            color: #333;
+            /* Text color */
+            background-color: #6c757d;
+            /* Background color */
+            background-image: linear-gradient(to bottom right, #5bb2e1, #5193da);
+            /* Gradient background */
+            border-radius: 5px;
+        }
+        /* Hover effect for dropdown items */
+        
+        .dropdown-item:hover {
+            color: #fff;
+            /* Text color on hover */
+            background-color: #0056b3;
+            /* Background color on hover */
+            background-image: none;
+            /* Remove gradient on hover */
+        }
+        
+        .learning-resources {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+            border-radius: 8px;
+        }
+        
+        .learning-resources h2 {
+            color: #5bb2e1;
+            margin-bottom: 20px;
+        }
+        
+        .learning-resources ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .learning-resources ul li {
+            margin-bottom: 10px;
+        }
+        
+        .learning-resources ul li a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        
+        .learning-resources ul li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar/menu -->
+    <nav class="navbar">
+        <h1>Code Partner</h1>
+        <a href="Student-Profile" class="navbar-btn">Profile</a>
+    </nav>
+
+    <!-- Content -->
+    <div class="content container">
+        <!-- Learning Resources Section -->
+        <div class="learning-resources">
+            <h2>Instructions</h2>
+            <ul>
+                <li>Using AI can vary depending on the specific AI tool or platform you're engaging with. However, here’s a general guide on how to interact effectively with AI, particularly conversational AI like me:</li>
+                <li><strong>1. Define Your Objective</strong>
+                    <ul>
+                        <li>Understand what you need: Whether it’s writing assistance, data analysis, image creation, or problem-solving, have a clear idea of what you want from the AI.</li>
+                    </ul>
+                </li>
+                <li><strong>2. Communicate Clearly</strong>
+                    <ul>
+                        <li>Be specific: The more details you provide, the better the AI can assist you.</li>
+                        <li>Use plain language: Avoid jargon or overly complex sentences unless necessary.</li>
+                        <li>Ask direct questions: If you need information or advice, ask in a straightforward manner.</li>
+                    </ul>
+                </li>
+                <li><strong>3. Provide Context</strong>
+                    <ul>
+                        <li>Background Information: If your request is related to a specific topic, give some context to help the AI understand better.</li>
+                        <li>Examples: When possible, provide examples to clarify your needs.</li>
+                    </ul>
+                </li>
+                <li><strong>4. Refine and Iterate</strong>
+                    <ul>
+                        <li>Review Responses: After receiving an answer, review it to see if it meets your needs.</li>
+                        <li>Ask follow-up questions: If the response is unclear or incomplete, ask for clarification or additional details.</li>
+                        <li>Provide feedback: Let the AI know if it misunderstood your request or if you need something different.</li>
+                    </ul>
+                </li>
+                <li><strong>5. Understand AI Limitations</strong>
+                    <ul>
+                        <li>Accuracy: While AI can be very accurate, it’s not infallible. Always verify critical information.</li>
+                        <li>Ethics and Bias: Be aware that AI can reflect biases present in its training data. Use it responsibly.</li>
+                        <li>Scope: AI may not be able to handle tasks requiring deep expertise, real-time data, or highly creative work beyond its programming.</li>
+                    </ul>
+                </li>
+                <li><strong>6. Using AI Tools</strong>
+                    <ul>
+                        <li>Writing and Editing: Tools like ChatGPT can assist with content creation, editing, and brainstorming.</li>
+                        <li>Data Analysis: AI tools can help analyze large datasets, identify patterns, and make predictions.</li>
+                        <li>Image Generation: Use AI for creative tasks like generating images based on text descriptions.</li>
+                        <li>Automation: AI can automate repetitive tasks, such as scheduling, sorting emails, or customer service.</li>
+                    </ul>
+                </li>
+                <li><strong>7. Privacy and Security</strong>
+                    <ul>
+                        <li>Data Privacy: Be mindful of the information you share with AI, especially sensitive or personal data.</li>
+                        <li>Secure Access: Use secure channels when interacting with AI, especially in professional or confidential settings.</li>
+                    </ul>
+                </li>
+                <li><strong>8. Learning and Adapting</strong>
+                    <ul>
+                        <li>Experiment: Don’t be afraid to try different approaches when using AI.</li>
+                        <li>Learn from interactions: The more you interact with AI, the better you’ll understand how to use it effectively.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -101,7 +101,9 @@ app.get('/HomePage2', (req, res) => {
 app.get('/HomePage3', (req, res) => {
     res.render('HomePage3');
 });
-
+app.get('/AI-ins', (req, res) => {
+    res.render('AI-ins');
+});
 
 
 
@@ -111,8 +113,11 @@ app.get('/Student-Profile', async(req, res) => {
     const api1 = apiDoc.api_key;
 
     if (user) {
-        res.render('Student-Profile', { api1 });
+        const x=user.FirstName;
+        res.render('Student-Profile', { api1,x });
+
     }
+
 
 });
 app.post('/HomePage', async(req, res) => {
