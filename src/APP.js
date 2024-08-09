@@ -159,6 +159,9 @@ app.get('/View-Users', async(req, res) => {
         res.status(500).send("Error retrieving users");
     }
 });
+app.get('/learning', (req, res) => {
+    res.render('learning');
+});
 app.get('/add-req', (req, res) => {
     res.render('add-req');
 });
