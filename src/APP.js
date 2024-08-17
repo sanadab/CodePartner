@@ -103,9 +103,21 @@ app.get('/contact', async(req, res) => {
         res.status(500).send("Error retrieving projects");
     }
 });
+app.get('/notifications', async(req, res) => {
+    try {
+        const users = await feed.find({});
+        res.render('notifications', { users });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error retrieving users");
+    }
+});
 
 app.get('/AI-ins2', (req, res) => {
     res.render('AI-ins2');
+});
+app.get('/AI-ins', (req, res) => {
+    res.render('AI-ins');
 });
 app.get('/feedback2', (req, res) => {
     res.render('feedback2');
