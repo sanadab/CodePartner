@@ -144,10 +144,36 @@ app.get('/AI-ins', (req, res) => {
 app.get('/feedback2', (req, res) => {
     res.render('feedback2');
 });
+app.get('/notifications', async(req, res) => {
+    try {
+        const users = await feed.find({});
+        res.render('notifications', { users });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error retrieving users");
+    }
+});
 
-
-
-
+app.delete('/delete-message10/:id', async(req, res) => {
+    try {
+        const { id } = req.params;
+        await feed.findByIdAndDelete(id);
+        res.json({ success: true });
+    } catch (err) {
+        console.error('Error deleting message:', err);
+        res.json({ success: false });
+    }
+});
+app.delete('/delete-message0/:id', async(req, res) => {
+    try {
+        const { id } = req.params;
+        await req1.findByIdAndDelete(id);
+        res.json({ success: true });
+    } catch (err) {
+        console.error('Error deleting message:', err);
+        res.json({ success: false });
+    }
+});
 app.post("/feedback2", async(req, res) => {
 
 

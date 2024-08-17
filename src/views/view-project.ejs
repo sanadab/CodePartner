@@ -219,7 +219,7 @@
                         <td>
                             <%= user.Priorety %>
                         </td>
-                        <td><button class="delete-button" onclick="deleteRow(this)">Delete</button></td>
+                        <td><button class="delete-button" onclick="deleteMessage('<%=user._id%>')">Delete</button></td>
                     </tr>
                     <% }); %>
             </tbody>
@@ -274,11 +274,6 @@
             }
         }
 
-        function deleteRow(button) {
-            var row = button.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-        }
-
         function searchProjects() {
             var searchQuery = document.getElementById('searchInput').value.toLowerCase();
             var rows = document.getElementById("userTableBody").getElementsByTagName("tr");
@@ -297,8 +292,21 @@
                 }
             }
         }
-
+        function deleteMessage(id) {
+            fetch(`/delete-message0/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Error deleting message');
+                    }
+                });
+        }
         window.onload = applySavedFilter;
+
     </script>
 </body>
 
