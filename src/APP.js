@@ -107,7 +107,9 @@ app.get('/contact', async(req, res) => {
 app.get('/AI-ins2', (req, res) => {
     res.render('AI-ins2');
 });
-
+app.get('/feedback2', (req, res) => {
+    res.render('feedback2');
+});
 app.get('/HomePage', (req, res) => {
     res.render('HomePage');
 });
@@ -138,71 +140,7 @@ app.get('/HomePage2', (req, res) => {
 app.get('/HomePage3', (req, res) => {
     res.render('HomePage3');
 });
-app.get('/AI-ins', (req, res) => {
-    res.render('AI-ins');
-});
-app.get('/feedback2', (req, res) => {
-    res.render('feedback2');
-});
-app.get('/notifications', async(req, res) => {
-    try {
-        const users = await feed.find({});
-        res.render('notifications', { users });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Error retrieving users");
-    }
-});
 
-app.delete('/delete-message10/:id', async(req, res) => {
-    try {
-        const { id } = req.params;
-        await feed.findByIdAndDelete(id);
-        res.json({ success: true });
-    } catch (err) {
-        console.error('Error deleting message:', err);
-        res.json({ success: false });
-    }
-});
-app.delete('/delete-message15/:id', async(req, res) => {
-    try {
-        const { id } = req.params;
-        await req2.findByIdAndDelete(id);
-        res.json({ success: true });
-    } catch (err) {
-        console.error('Error deleting message:', err);
-        res.json({ success: false });
-    }
-});
-app.delete('/delete-message0/:id', async(req, res) => {
-    try {
-        const { id } = req.params;
-        await req1.findByIdAndDelete(id);
-        res.json({ success: true });
-    } catch (err) {
-        console.error('Error deleting message:', err);
-        res.json({ success: false });
-    }
-});
-app.post("/feedback2", async(req, res) => {
-
-
-
-
-    const newUser1 = new feed({
-        feedback: req.body.feedback
-
-    });
-
-    await newUser1.save();
-
-    console.log("Data saved successfully:");
-
-
-    return res.redirect('/feedback2');
-
-
-});
 
 
 
@@ -291,6 +229,25 @@ app.get('/view-project2', async(req, res) => {
         res.status(500).send("Error retrieving projects");
     }
 });
+app.post("/feedback2", async(req, res) => {
+
+
+
+
+    const newUser1 = new feed({
+        feedback: req.body.feedback
+
+    });
+
+    await newUser1.save();
+
+    console.log("Data saved successfully:");
+
+
+    return res.redirect('/feedback2');
+
+
+});
 app.delete('/delete-message/:id', async(req, res) => {
     try {
         const { id } = req.params;
@@ -301,10 +258,30 @@ app.delete('/delete-message/:id', async(req, res) => {
         res.json({ success: false });
     }
 });
+app.delete('/delete-message16/:id', async(req, res) => {
+    try {
+        const { id } = req.params;
+        await req1.findByIdAndDelete(id);
+        res.json({ success: true });
+    } catch (err) {
+        console.error('Error deleting message:', err);
+        res.json({ success: false });
+    }
+});
 app.delete('/delete-message4/:id', async(req, res) => {
     try {
         const { id } = req.params;
         await User.findByIdAndDelete(id);
+        res.json({ success: true });
+    } catch (err) {
+        console.error('Error deleting message:', err);
+        res.json({ success: false });
+    }
+});
+app.delete('/delete-message17/:id', async(req, res) => {
+    try {
+        const { id } = req.params;
+        await req2.findByIdAndDelete(id);
         res.json({ success: true });
     } catch (err) {
         console.error('Error deleting message:', err);
