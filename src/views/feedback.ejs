@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student-Profile</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+        }
+        
+        body {
+            font-size: 16px;
+            background-color: #001f3f;
+            background: linear-gradient(to bottom right, #001f3f, #5bb2e1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* Navbar Styles */
+        
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            padding: 10px 0;
+        }
+        
+        .navbar-brand {
+            float: left;
+            color: #f4f4f4;
+            font-size: 24px;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        
+        .navbar-brand:hover {
+            background-color: #444;
+        }
+        
+        .profile-button {
+            float: right;
+            color: #f4f4f4;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        
+        .profile-button:hover {
+            background-color: #444;
+        }
+        /* Page Title */
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        /* Table Styles */
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        
+        th,
+        td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #333;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+        
+        tbody tr:hover {
+            background-color: #e9ecef;
+        }
+        /* Dropdown Style */
+        
+        .filter-dropdown {
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 200px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        /* Button Style (optional) */
+        
+        .apply-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        
+        .apply-button:hover {
+            background-color: #0056b3;
+        }
+        /* Feedback Form Styles */
+        
+        .feedback-container {
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .feedback-container h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .feedback-container textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            resize: vertical;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .feedback-container textarea:focus {
+            border-color: #007bff;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        }
+        
+        .feedback-container button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .feedback-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="#" class="navbar-brand">Code Partner</a>
+        <a href="Student-Profile" class="profile-button">Profile</a>
+    </div>
+    <form class="form" action="/feedback" method="POST">
+        <div class="container">
+            <!-- Feedback Form -->
+            <div class="feedback-container">
+                <h2>We value your feedback!</h2>
+                <textarea name="feedback" placeholder="Enter your feedback here..."></textarea>
+                <button type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

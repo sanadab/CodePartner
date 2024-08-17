@@ -104,18 +104,46 @@
             font-size: 16px;
         }
         /* Button Style (optional) */
+        /* Button Style */
         
         .apply-button {
-            background-color: #007bff;
+            background-color: #3b5f85;
+            /* Darker shade to match the navbar */
             color: #fff;
-            border: none;
-            padding: 10px 20px;
-            margin-top: 10px;
+            border: 6px;
+            padding: 12px 10px;
+            margin-top: 15px;
             cursor: pointer;
+            border-radius: 3px;
+            /* Rounded corners for a modern look */
         }
         
         .apply-button:hover {
-            background-color: #0056b3;
+            background-color: #004494;
+            /* Even darker shade on hover */
+        }
+        
+        .delete-button {
+            background-color: #e74c3c;
+            /* Red color */
+            color: #fff;
+            border: none;
+            padding: 6px 15px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+        
+        .delete-button:hover {
+            background-color: #c0392b;
+            /* Darker red color on hover */
+        }
+        
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            /* Blue color */
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -144,7 +172,7 @@
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Roll</th>
-                    <th>Block</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody id="userTableBody">
@@ -165,8 +193,8 @@
                             <%= user.Roll %>
                         </td>
                         <td>
-                            <button class="delete-button" onclick="deleteMessage('<%= user._id %>')">Delete</button>
-                            
+                            <button class="delete-button" onclick="deleteMessage('<%= user._id %>')">Block</button>
+
                         </td>
                     </tr>
                     <% }); %>
@@ -200,6 +228,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             applyFilter();
         });
+
         function deleteMessage(id) {
             fetch(`/delete-message4/${id}`, {
                     method: 'DELETE'

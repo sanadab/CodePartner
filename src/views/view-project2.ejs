@@ -8,14 +8,20 @@
     <style>
         /* Global Styles */
         
+        html,
         body {
-            font-family: 'Arial', sans-serif;
+            height: 100%;
             margin: 0;
             padding: 0;
-            background: #f0f0f0;
-            /* Fallback */
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            /* font-size: 16px; */
+            background-color: #001f3f;
             background: linear-gradient(to bottom right, #001f3f, #5bb2e1);
-            /* Gradient */
+            /* display: flex; */
+            flex-direction: column;
         }
         
         .container {
@@ -36,7 +42,7 @@
             color: #f4f4f4;
             font-size: 24px;
             text-decoration: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
         }
         
         .navbar-brand:hover {
@@ -57,7 +63,7 @@
         
         h1 {
             text-align: center;
-            color: #333;
+            color: #ffffff;
             margin-top: 20px;
         }
         /* Table Styles */
@@ -97,25 +103,62 @@
         /* Dropdown Style */
         
         .filter-dropdown {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             width: 100%;
             max-width: 200px;
             padding: 10px;
             font-size: 16px;
         }
-        /* Button Style (optional) */
+        /* Button Style */
         
         .apply-button {
-            background-color: #007bff;
+            background-color: #3b5f85;
             color: #fff;
             border: none;
-            padding: 10px 20px;
-            margin-top: 10px;
+            padding: 12px 10px;
             cursor: pointer;
+            border-radius: 3px;
         }
         
         .apply-button:hover {
-            background-color: #0056b3;
+            background-color: #004494;
+        }
+        
+        .delete-button {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 6px 15px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+        
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+        /* Container for Search and Filter */
+        
+        .search-filter-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            /* Space between elements */
+            margin-bottom: 10px;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .search-input {
+            padding: 10px;
+            font-size: 16px;
+            max-width: 170px;
+            border: 1px solid #ccc;
+            border-radius: 0px;
         }
     </style>
 </head>
@@ -125,20 +168,26 @@
         <a href="#" class="navbar-brand">Code Partner</a>
         <a href="Freelancer-Profile" class="profile-button">Profile</a>
     </div>
-
     <div class="container">
         <h1>All Projects</h1>
 
-        <!-- Filter Dropdown -->
-        <select id="filterDropdown" class="filter-dropdown">
-            <option value="all">Show All</option>
-            <% users.forEach(user => { %>
-            <option value="<%= user.Projectname2 %>"><%= user.Projectname2 %></option>
-            
-            <!-- Add more options as needed -->
-            <% }); %>
-        </select>
-        <button class="apply-button" onclick="applyFilter()">Apply Filter</button>
+        <!-- Search and Filter Container -->
+        <div class="search-filter-container">
+            <!-- Search Input -->
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search projects...">
+                <button class="apply-button" onclick="searchProjects()">Search</button>
+            </div>
+
+            <!-- Filter Dropdown -->
+            <select id="filterDropdown" class="filter-dropdown">
+                <option value="all">Show All</option>
+                <% users.forEach(user => { %>
+                    <option value="<%= user.Projectname2 %>"><%= user.Projectname2 %></option>
+                <% }); %>
+            </select>
+            <button class="apply-button" onclick="applyFilter()">Apply Filter</button>
+        </div>
 
         <table>
             <thead>
@@ -178,13 +227,34 @@
 
     <!-- JavaScript for filtering -->
     <script>
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
         function applyFilter() {
             var filter = document.getElementById('filterDropdown').value;
+            setCookie('filter', filter, 7); // Save filter to cookie for 7 days
             var rows = document.getElementById("userTableBody").getElementsByTagName("tr");
 
             for (var i = 0; i < rows.length; i++) {
                 var projectName = rows[i].getElementsByTagName("td")[0].innerText.toLowerCase();
-
                 if (filter === 'all') {
                     rows[i].style.display = "";
                 } else if (projectName !== filter) {
@@ -194,6 +264,40 @@
                 }
             }
         }
+
+        function applySavedFilter() {
+            var savedFilter = getCookie('filter');
+            if (savedFilter) {
+                document.getElementById('filterDropdown').value = savedFilter;
+                applyFilter();
+            }
+        }
+
+        function deleteRow(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
+        function searchProjects() {
+            var searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            var rows = document.getElementById("userTableBody").getElementsByTagName("tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var projectName = rows[i].getElementsByTagName("td")[0].innerText.toLowerCase();
+                var issue = rows[i].getElementsByTagName("td")[1].innerText.toLowerCase();
+                var description = rows[i].getElementsByTagName("td")[2].innerText.toLowerCase();
+                var childIssue = rows[i].getElementsByTagName("td")[3].innerText.toLowerCase();
+                var priority = rows[i].getElementsByTagName("td")[4].innerText.toLowerCase();
+
+                if (projectName.includes(searchQuery) || issue.includes(searchQuery) || description.includes(searchQuery) || childIssue.includes(searchQuery) || priority.includes(searchQuery)) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+
+        window.onload = applySavedFilter;
     </script>
 </body>
 

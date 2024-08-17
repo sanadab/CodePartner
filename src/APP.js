@@ -10,7 +10,10 @@ const api = require('./Database/api.js').api;
 const req1 = require('./Database/sreq.js').reqs;
 const req2 = require('./Database/freq.js').req2;
 const contact = require('./Database/cont.js').contact;
+const feed = require('./Database/feedback.js').feed;
+
 const cookieParser = require("cookie-parser");
+const request = require('supertest');
 const { setCookie, readCookie, editCookie, deleteCookie } = require("../cookies.js");
 // import express from 'express';
 // import path from 'path';
@@ -18,6 +21,36 @@ const app = express();
 const saltRounds = 10;
 app.use(bodyParser.json());
 
+
+// Configure your email transport
+const transporter = nodemailer.createTransport({
+    service: 'Gmail', // or another service
+    auth: {
+        user: 'sanadabed92@gmail.com',
+        pass: 'Sanadab77@'
+    }
+});
+
+// Send message endpoint
+app.post('/send-message', (req, res) => {
+    const { email, message } = req.body;
+
+    const mailOptions = {
+        from: 'sanadabed92@gmail.com',
+        to: email,
+        subject: 'New Message from Code Partner',
+        text: message
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log('Error sending email:', error);
+            return res.status(500).json({ success: false });
+        }
+        console.log('Email sent:', info.response);
+        res.json({ success: true });
+    });
+});
 
 app.set('views', path.join(__dirname, 'views'));
 
@@ -71,7 +104,9 @@ app.get('/contact', async(req, res) => {
     }
 });
 
-
+app.get('/AI-ins2', (req, res) => {
+    res.render('AI-ins2');
+});
 
 app.get('/HomePage', (req, res) => {
     res.render('HomePage');
@@ -82,7 +117,9 @@ app.get('/ForgotPW', (req, res) => {
 app.get('/Sign-Up', (req, res) => {
     res.render('Sign-Up');
 });
-
+app.get('/feedback', (req, res) => {
+    res.render('feedback');
+});
 app.get('/Sign-Up-Student', (req, res) => {
     res.render('Sign-Up-Student');
 });
@@ -104,6 +141,32 @@ app.get('/HomePage3', (req, res) => {
 app.get('/AI-ins', (req, res) => {
     res.render('AI-ins');
 });
+app.get('/feedback2', (req, res) => {
+    res.render('feedback2');
+});
+
+
+
+
+app.post("/feedback2", async(req, res) => {
+
+
+
+
+    const newUser1 = new feed({
+        feedback: req.body.feedback
+
+    });
+
+    await newUser1.save();
+
+    console.log("Data saved successfully:");
+
+
+    return res.redirect('/feedback2');
+
+
+});
 
 
 
@@ -113,8 +176,8 @@ app.get('/Student-Profile', async(req, res) => {
     const api1 = apiDoc.api_key;
 
     if (user) {
-        const x=user.FirstName;
-        res.render('Student-Profile', { api1,x });
+        const x = user.FirstName;
+        res.render('Student-Profile', { api1, x });
 
     }
 
@@ -212,6 +275,16 @@ app.delete('/delete-message4/:id', async(req, res) => {
         res.json({ success: false });
     }
 });
+app.delete('/delete-message10/:id', async(req, res) => {
+    try {
+        const { id } = req.params;
+        await feed.findByIdAndDelete(id);
+        res.json({ success: true });
+    } catch (err) {
+        console.error('Error deleting message:', err);
+        res.json({ success: false });
+    }
+});
 app.get('/view-project', async(req, res) => {
     try {
         const userCookie = req.cookies.user;
@@ -231,7 +304,25 @@ app.get('/view-project', async(req, res) => {
         res.status(500).send("Error retrieving projects");    
     }
 });
+app.post("/feedback", async(req, res) => {
 
+
+
+
+    const newUser1 = new feed({
+        feedback: req.body.feedback
+
+    });
+
+    await newUser1.save();
+
+    console.log("Data saved successfully:");
+
+
+    return res.redirect('/feedback');
+
+
+});
 
 app.post("/add-req2", async(req, res) => {
     try {
