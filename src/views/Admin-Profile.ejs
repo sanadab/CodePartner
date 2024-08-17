@@ -11,12 +11,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
     <script defer src="https://use.fontawesome.com/releases/v6.2.1/js/all.js"></script>
     <style>
-        body,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5 {
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
             font-family: "Poppins", sans-serif;
         }
         
@@ -24,7 +23,8 @@
             font-size: 16px;
             background-color: #001f3f;
             background: linear-gradient(to bottom right, #001f3f, #5bb2e1);
-            margin-left: -40px;
+            display: flex;
+            flex-direction: column;
         }
         
         .content {
@@ -95,6 +95,7 @@
         }
         
         .container {
+            flex: 1;
             margin-top: 40px;
             margin-bottom: 40px;
         }
@@ -175,6 +176,7 @@
     <nav class="navbar">
         <h1>Code Partner</h1>
         <div class="ms-auto d-flex align-items-center">
+            <a href="notifications" class="navbar-btn">Notifications</a>
             <a href="View-Users" class="navbar-btn">View Users</a>
             <a href="contact" class="navbar-btn">Contact</a>
             <a href="HomePage3" class="navbar-btn">Home</a>
@@ -184,12 +186,46 @@
 
     <!-- Content -->
     <div class="container">
+        <!-- Dashboard Overview -->
         <div class="content">
-            <h2>Admin Page</h2>
-            <p>This is a sample Admin profile page.</p>
+            <h2 class="display-6" style="color: #5bb2e1;">Welcome to Code Partner</h2>
+            <p>This is a sample admin profile page.</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card bg-light text-dark mb-3">
+                        <div class="card-header">Active Users</div>
+                        <div class="card-body">
+                            <h5 class="card-title">150</h5>
+                            <p class="card-text">Users currently online</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-light text-dark mb-3">
+                        <div class="card-header">System Status</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Operational</h5>
+                            <p class="card-text">All systems are running smoothly</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="card bg-light text-dark mb-3">
+                        <div class="card-header">Notifications</div>
+                        <div class="card-body">
+                            <div id="notification-container">
+                                <div class="alert alert-info" role="alert">
+                                    New updates are available. <a href="notifications" class="alert-link">Check it out</a>.
+                                </div>
+                                <!-- Add more notifications here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
     </div>
 
 

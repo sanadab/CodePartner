@@ -4,16 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Users</title>
+    <title>Student-Profile</title>
     <style>
         /* Global Styles */
         
+        html,
         body {
-            font-family: 'Arial', sans-serif;
+            height: 100%;
             margin: 0;
             padding: 0;
-            background: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            /* font-size: 16px; */
+            background-color: #001f3f;
             background: linear-gradient(to bottom right, #001f3f, #5bb2e1);
+            /* display: flex; */
+            flex-direction: column;
         }
         
         .container {
@@ -21,6 +29,7 @@
             margin: 0 auto;
             padding: 20px;
         }
+        /* Navbar Styles */
         
         .navbar {
             background-color: #333;
@@ -33,7 +42,7 @@
             color: #f4f4f4;
             font-size: 24px;
             text-decoration: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
         }
         
         .navbar-brand:hover {
@@ -50,12 +59,14 @@
         .profile-button:hover {
             background-color: #444;
         }
+        /* Page Title */
         
         h1 {
             text-align: center;
-            color: #333;
+            color: #ffffff;
             margin-top: 20px;
         }
+        /* Table Styles */
         
         table {
             width: 100%;
@@ -89,46 +100,55 @@
         tbody tr:hover {
             background-color: #e9ecef;
         }
+        /* Dropdown Style */
         
         .filter-dropdown {
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             width: 100%;
             max-width: 200px;
             padding: 10px;
             font-size: 16px;
         }
+        /* Button Style */
         
-        .apply-button,
-        .search-button {
-            background-color: #007bff;
+        .apply-button {
+            background-color: #3b5f85;
             color: #fff;
             border: none;
-            padding: 10px 20px;
-            margin-top: 10px;
+            padding: 12px 10px;
             cursor: pointer;
+            border-radius: 3px;
         }
         
-        .apply-button:hover,
-        .search-button:hover {
-            background-color: #0056b3;
+        .apply-button:hover {
+            background-color: #004494;
         }
         
         .delete-button {
-            background-color: #dc3545;
+            background-color: #e74c3c;
             color: #fff;
             border: none;
-            padding: 5px 10px;
+            padding: 6px 15px;
             cursor: pointer;
+            border-radius: 3px;
+            font-size: 16px;
         }
         
         .delete-button:hover {
-            background-color: #c82333;
+            background-color: #c0392b;
+        }
+        /* Container for Search and Filter */
+        
+        .search-filter-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            /* Space between elements */
+            margin-bottom: 10px;
         }
         
         .search-container {
             display: flex;
-            margin-bottom: 20px;
-            justify-content: center;
             align-items: center;
             gap: 10px;
         }
@@ -136,10 +156,9 @@
         .search-input {
             padding: 10px;
             font-size: 16px;
-            flex: 1;
-            max-width: 300px;
+            max-width: 170px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 0px;
         }
     </style>
 </head>
@@ -153,20 +172,23 @@
     <div class="container">
         <h1>All Projects</h1>
 
-        <!-- Search Input -->
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="Search projects...">
-            <button class="search-button" onclick="searchProjects()">Search</button>
-        </div>
+        <!-- Search and Filter Container -->
+        <div class="search-filter-container">
+            <!-- Search Input -->
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search projects...">
+                <button class="apply-button" onclick="searchProjects()">Search</button>
+            </div>
 
-        <!-- Filter Dropdown -->
-        <select id="filterDropdown" class="filter-dropdown">
-            <option value="all">Show All</option>
-            <% users.forEach(user => { %>
-            <option value="<%= user.Projectname %>"><%= user.Projectname %></option>
-            <% }); %>
-        </select>
-        <button class="apply-button" onclick="applyFilter()">Apply Filter</button>
+            <!-- Filter Dropdown -->
+            <select id="filterDropdown" class="filter-dropdown">
+                <option value="all">Show All</option>
+                <% users.forEach(user => { %>
+                    <option value="<%= user.Projectname %>"><%= user.Projectname %></option>
+                <% }); %>
+            </select>
+            <button class="apply-button" onclick="applyFilter()">Apply Filter</button>
+        </div>
 
         <table>
             <thead>
@@ -197,10 +219,7 @@
                         <td>
                             <%= user.Priorety %>
                         </td>
-                        <td>
-                            <button class="delete-button" onclick="deleteRow(this)">Delete</button>
-                            
-                        </td>
+                        <td><button class="delete-button" onclick="deleteMessage('<%=user._id%>')">Delete</button></td>
                     </tr>
                     <% }); %>
             </tbody>
@@ -255,11 +274,6 @@
             }
         }
 
-        function deleteRow(button) {
-            var row = button.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-        }
-
         function searchProjects() {
             var searchQuery = document.getElementById('searchInput').value.toLowerCase();
             var rows = document.getElementById("userTableBody").getElementsByTagName("tr");
@@ -278,8 +292,22 @@
                 }
             }
         }
-
+        function deleteMessage(id) {
+            fetch(`/delete-message0/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Error deleting message');
+                    }
+                });
+        }
+        
         window.onload = applySavedFilter;
+
     </script>
 </body>
 
