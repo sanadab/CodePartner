@@ -254,10 +254,16 @@ app.get('/view-project2', async(req, res) => {
         res.status(500).send("Error retrieving projects");
     }
 });
+app.get('/View-Users', async(req, res) => {
+    try {
+        const users = await User.find({});
+        res.render('View-Users', { users });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error retrieving users");
+    }
+});
 app.post("/feedback2", async(req, res) => {
-
-
-
 
     const newUser1 = new feed({
         feedback: req.body.feedback
@@ -597,7 +603,7 @@ app.post('/Sign-In', async(req, res) => {
             }
         } else {
             console.log("Invalid credentials");
-            return res.status(401).json({ error: "Invalid credentials" });
+            return res.status(401).redirect('/Sign-In');
         }
     } catch (err) {
         console.error(err);
