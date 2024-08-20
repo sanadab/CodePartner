@@ -155,6 +155,26 @@ app.get('/HomePage3', (req, res) => {
 
 
 
+app.post('/HomePage', async(req, res) => {
+    try {
+        console.log("Form submission received:", req.body);
+
+        const newContact = new contact({
+            Name: req.body.Name,
+            Message: req.body.Message,
+            Email: req.body.Email,
+        });
+
+        await newContact.save();
+
+        console.log("Data saved successfully:", newContact);
+        return res.redirect('/HomePage');
+
+    } catch (err) {
+        console.error("Error saving data:", err);
+        return res.status(500).send("Internal Server Error");
+    }
+});
 
 app.get('/Student-Profile', async(req, res) => {
     const user = isStudent(req, res);
@@ -168,6 +188,16 @@ app.get('/Student-Profile', async(req, res) => {
     }
 
 
+});
+
+app.get('/Freelancer-Profile', async(req, res) => {
+    const user = isFreelanser(req, res);
+    const apiDoc = await api.findOne({});
+    const api1 = apiDoc.api_key;
+
+    if (user) {
+        res.render('Freelancer-Profile', { api1 });
+    }
 });
 app.post('/HomePage', async(req, res) => {
     try {
@@ -189,30 +219,13 @@ app.post('/HomePage', async(req, res) => {
         return res.status(500).send("Internal Server Error");
     }
 });
-app.get('/Freelancer-Profile', async(req, res) => {
-    const user = isFreelanser(req, res);
-    const apiDoc = await api.findOne({});
-    const api1 = apiDoc.api_key;
-
-    if (user) {
-        res.render('Freelancer-Profile', { api1 });
-    }
-});
 app.get('/Admin-Profile', (req, res) => {
     const user = isAdmin(req, res);
     if (user) {
         res.render('Admin-Profile');
     }
 });
-app.get('/View-Users', async(req, res) => {
-    try {
-        const users = await User.find({});
-        res.render('View-Users', { users });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Error retrieving users");
-    }
-});
+
 app.get('/learning', (req, res) => {
     res.render('learning');
 });
