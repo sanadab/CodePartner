@@ -11,6 +11,18 @@ import app from '../src/APP.js'; // Update this path to match your app location
 import { User } from '../src/Database/User.js';
 
 
+describe('Cookie Tests', () => {
+
+    it('should clear the user cookie on logout', async() => {
+        const response = await request(app)
+            .get('/logout')
+            .expect(302);
+
+        const cookies = response.headers['set-cookie'];
+        expect(cookies).to.not.be.undefined;
+        expect(cookies[0]).to.include('user=;');
+    });
+});
 
 describe('POST /Sign-Up', () => {
     let findOneStub;

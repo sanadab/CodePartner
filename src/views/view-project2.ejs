@@ -267,6 +267,26 @@
                 }
             }
         }
+
+        function searchProjects() {
+            var searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            var rows = document.getElementById("userTableBody").getElementsByTagName("tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var projectName = rows[i].getElementsByTagName("td")[0].innerText.toLowerCase();
+                var issue = rows[i].getElementsByTagName("td")[1].innerText.toLowerCase();
+                var description = rows[i].getElementsByTagName("td")[2].innerText.toLowerCase();
+                var childIssue = rows[i].getElementsByTagName("td")[3].innerText.toLowerCase();
+                var priority = rows[i].getElementsByTagName("td")[4].innerText.toLowerCase();
+
+                if (projectName.includes(searchQuery) || issue.includes(searchQuery) || description.includes(searchQuery) || childIssue.includes(searchQuery) || priority.includes(searchQuery)) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+
         function deleteMessage(id) {
             fetch(`/delete-message17/${id}`, {
                     method: 'DELETE'
