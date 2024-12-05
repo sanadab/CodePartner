@@ -1,3 +1,4 @@
+//cookies page
 const setCookie = (res, name, value, days) => {
     const options = {
         httpOnly: true,

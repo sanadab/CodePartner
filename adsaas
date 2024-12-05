@@ -1,0 +1,256 @@
+[33mcommit 7af0053ced5410049e8d1914bef173b5d8441cb0[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: MohamadWattad <112653193+MohamadWattad@users.noreply.github.com>
+Date:   Tue Aug 27 15:01:28 2024 +0300
+
+    Create README.md
+
+[33mcommit 894d38b79d9743a18aa12b97396bd78823e9e8fd[m
+Author: sanadab <109818122+sanadab@users.noreply.github.com>
+Date:   Sat Aug 24 20:50:57 2024 +0300
+
+    unit test for the logout with cookies
+
+[33mcommit 583262ed787ce48eebbc6841cba5498b229bff34[m
+Author: MohamadWattad <abotalebwattad@gmail.com>
+Date:   Tue Aug 20 20:01:05 2024 +0300
+
+    Update in sign-in
+
+[33mcommit 46d32eb9af37b3b963cbbba43559fb07bf3d1118[m
+Author: MohamadWattad <abotalebwattad@gmail.com>
+Date:   Tue Aug 20 17:40:28 2024 +0300
+
+    BSPMS2427-101 <message> , BSPMS2427-102 <message>
+
+[33mcommit 5396ec5a13ca39691ab59cf5f08467243727efa7[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Sat Aug 17 20:22:47 2024 +0300
+
+    BSPMS2427-66 <message>
+
+[33mcommit d7e80e3922076f0441da8f2d7859a3f8ce4e309e[m
+Merge: 2585dd0 75ffd46
+Author: abdallh09 <abdalab8@ac.sce.ac.il>
+Date:   Sat Aug 17 19:58:22 2024 +0300
+
+    BSPMS2427-31 <message>,BSPMS2427-35 <message>,BSPMS2427-32 <message>
+
+[33mcommit 2585dd0330a65dc86f9e3b62d5d537c4e41e14d4[m
+Author: abdallh09 <abdalab8@ac.sce.ac.il>
+Date:   Sat Aug 17 19:42:09 2024 +0300
+
+    BSPMS2427-31 <message>,BSPMS2427-35 <message>,BSPMS2427-32 <message>
+
+[33mcommit 75ffd465d5dff62e45b6285c25de75f6f50c33ac[m
+Author: MohamadWattad <abotalebwattad@gmail.com>
+Date:   Sat Aug 17 19:04:57 2024 +0300
+
+    BSPMS2427-46 <message>,BSPMS2427-58 <message>,BSPMS2427-72 <message>
+
+[33mcommit 6f725ddad938f6fd39fde67eecb7a23280f9b080[m
+Author: sanadab <109818122+sanadab@users.noreply.github.com>
+Date:   Sat Aug 17 18:27:55 2024 +0300
+
+    BSPMS2427-48 <message> ,BSPMS2427-96 <message>,unit test for the exist user in the sign up
+
+[33mcommit 3242a7c54dd528c3692e79e240459e6ef5c28f88[m
+Author: sanadab <109818122+sanadab@users.noreply.github.com>
+Date:   Fri Aug 9 16:31:27 2024 +0300
+
+    test-units
+
+[33mcommit 7e17daea5d939a2eee215fd6f339616c0de8ea76[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Fri Aug 9 16:09:01 2024 +0300
+
+    BSPMS2427-92 <message>
+
+[33mcommit d9fc2c8226c4f567450809228f478181429f45e2[m
+Author: abdallh09 <abdalab8@ac.sce.ac.il>
+Date:   Fri Aug 9 15:26:55 2024 +0300
+
+    BSPMS2427-85 <message>,BSPMS2427-88 <Mohamed watad made a push in the last commit>,BSPMS2427-90 <sanad abo abed made a push in the last commit>
+
+[33mcommit 299377999e1259e2f816dc68a16a0522b1a37bd8[m
+Author: MohamadWattad <abotalebwattad@gmail.com>
+Date:   Thu Aug 8 19:01:29 2024 +0300
+
+    i added a block button in the View-Users for the Admin and i made tge roll in the sign up hidden
+
+[33mcommit 978489f4130072e05cb287bf8f5a63b90675a01c[m
+Author: sanadab <109818122+sanadab@users.noreply.github.com>
+Date:   Thu Aug 8 17:30:40 2024 +0300
+
+    I added a button on the freelancer and admin page to go to the home page and changed the font size on the home page.
+
+[33mcommit 9493413cd67558d22183e3b88f20a03393f17c47[m
+Author: sanadab <109818122+sanadab@users.noreply.github.com>
+Date:   Thu Aug 8 16:48:31 2024 +0300
+
+    I added a button on the student page to go to the home page and changed the font size on the home page.
+
+[33mcommit d9c92de1d17f4f70adecc3b87fd4a9887ae87c40[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Sat Aug 3 19:45:37 2024 +0300
+
+    BSPMS2427-75 <message> , BSPMS2427-25 <message>
+
+[33mcommit 71483cae5d5ada07a456e4a582909df7eae2f6c5[m
+Author: MohamadWattad <abotalebwattad@gmail.com>
+Date:   Sat Aug 3 19:26:32 2024 +0300
+
+    BSPMS2427-28 <message>,BSPMS2427-19 <message>,BSPMS2427-22 <message>
+
+[33mcommit 8253c5864592d69d9362fc96110ce2ff813f864b[m
+Author: abdallh09 <abdalab8@ac.sce.ac.il>
+Date:   Sat Aug 3 19:01:41 2024 +0300
+
+    BSPMS2427-52 <message>,BSPMS2427-78 <message>,BSPMS2427-68 <message>
+
+[33mcommit 2301166ad39c1a1340eba1eaa14a0c649df45ec8[m
+Author: sanadab <109818122+sanadab@users.noreply.github.com>
+Date:   Sat Aug 3 17:46:36 2024 +0300
+
+    stam
+
+[33mcommit 068403348166c688453ce62a62a15128b3181474[m
+Author: sanadab <109818122+sanadab@users.noreply.github.com>
+Date:   Sat Aug 3 17:17:29 2024 +0300
+
+    stam
+
+[33mcommit d53ef509183468da6fea7ad0b7b1738cf0f54900[m
+Author: sanadab <109818122+sanadab@users.noreply.github.com>
+Date:   Sat Aug 3 16:00:56 2024 +0300
+
+    BSPMS2427-81 <message>,BSPMS2427-84 <message>
+
+[33mcommit 518f062c29131256f03dc16881a710f382d82c4b[m
+Author: sanadab <109818122+sanadab@users.noreply.github.com>
+Date:   Sat Aug 3 15:58:36 2024 +0300
+
+    BSPMS2427-81 <message>,BSPMS2427-84 <message>
+
+[33mcommit 8e0694c354f4a43f373ee41298c53e05eaa03a53[m
+Author: sanadab <109818122+sanadab@users.noreply.github.com>
+Date:   Sat Aug 3 15:57:22 2024 +0300
+
+    BSPMS2427-81 <message>,BSPMS2427-84 <message>
+
+[33mcommit 165acab7dc8353779bd033374fae09bd56b5cf82[m
+Merge: 036f280 323d1cb
+Author: sanadab <109818122+sanadab@users.noreply.github.com>
+Date:   Fri Aug 2 19:41:15 2024 +0300
+
+    Merge branch 'master' of https://github.com/BS-PMC-2024/BS-PMC-2024-Team27
+
+[33mcommit 036f280ee0a3c3197fd9634b4c5d050187768f36[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 06:13:19 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit 10fc03a5df5fba7be7215af905c2c36534d4cb34[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 05:51:19 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit 0bad37c62344a77437481df5a21620701e76835c[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 04:51:00 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit 9b17ca989f9a73c615e09e0740be08d173155974[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 04:47:25 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit f95126fb740ed58da66ad3a94f5c8fd876cdaf00[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 04:30:47 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit 5f2984795c090150c845ceb04fdfc09ac93fbead[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 04:20:01 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit 1a9e01cd721a389dbeed87b82c443bb3a0a0ea5c[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 04:18:55 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit d1ba069e115c6a74825d72333186552ad2b894c7[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 04:17:43 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit 4698dcebc3987ec48cb6f8d31bfe65d3dac1c9bb[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 04:16:28 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit 1ee22cfdc8294e7ac20e04e9506bb6cd2bcaa39c[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 02:33:00 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit 0a9a09bcc60f5eae2fa96dc679371ae1a9520506[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 02:17:54 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit 1ba0d236e5c8ea985fdf2fceab1541c643a3e8b7[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 02:16:12 2024 +0300
+
+    Create Jenkinsfile
+
+[33mcommit f217a6269c9caad9f50fc683c22588fe652d9fe5[m
+Author: sanadab <109818122+sanadab@users.noreply.github.com>
+Date:   Fri Aug 2 19:28:14 2024 +0300
+
+    BSPMS2427-81 <message> ,BSPMS2427-84 <message>
+
+[33mcommit 323d1cbea014b73750e27ce9d70902ca4b3655ff[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 06:13:19 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit b4e3cab358549c7f36adac4b61e5857a8ff92903[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 05:51:19 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit c078a5a7f813da5c6ecf92da29921d27fda5a853[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 04:51:00 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit 574e7afe6499826284d14b8e46a79a0c02d3311c[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 04:47:25 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit 5f2a60011a63f85a4e6196f6bd08da9cd8b1632c[m
+Author: noorwa11 <noorwa1@ac.sce.ac.il>
+Date:   Wed Jul 17 04:30:47 2024 +0300
+
+    Update Jenkinsfile
+
+[33mcommit d1ffb7a5434206ad76bca85afb3afa997d9d8fa8[m
+Author: 
